@@ -4,29 +4,42 @@
     <title>Sean's Site</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      /* Use Helvetica for all text, bold for headings */
       body {
         font-family: Helvetica, Arial, sans-serif;
         line-height: 1.5;
-        margin: 2em; /* increased margin for better spacing */
       }
+
       h1, h2, h3, h4, h5, h6, strong, b {
         font-family: Helvetica, Arial, sans-serif;
         font-weight: bold;
       }
+
       p, a, span {
         font-family: Helvetica, Arial, sans-serif;
       }
+
       h1, h2, h3, h4, h5, h6, p, a, span {
         margin-top: 0.5em;
         margin-bottom: 0.5em;
+      }
+
+      /* blinking underscore */
+      .blink {
+        animation: blink 1s steps(2, start) infinite;
+      }
+
+      @keyframes blink {
+        to {
+          visibility: hidden;
+        }
       }
     </style>
   </head>
 
   <body class="m-8">
-    <h1 class="text-5xl text-purple-500 mb-6">
-      SEAN GILBERT TOOMEY
+    <!-- TITLE -->
+    <h1 class="text-5xl text-black font-bold mb-6">
+      <span id="typewriter"></span><span class="blink">_</span>
     </h1>
 
     <h2 class="text-xl font-semibold mt-4">My Writing</h2>
@@ -86,5 +99,53 @@
     <p class="mt-8 text-sm text-gray-600">
       This site was coded by hand on 2/15/26 for the purpose of applying to summer internships.
     </p>
+
+    <!-- TYPEWRITER SCRIPT -->
+    <script>
+      const text1 = "Sean Gilbert Toomey";
+      const text2 = "Your best intern ever";
+
+      const el = document.getElementById("typewriter");
+
+      let currentText = text1;
+      let index = 0;
+      let phase = 0; // 0 typing first, 1 deleting, 2 typing second
+
+      function typeLoop() {
+        if (phase === 0) {
+          el.textContent = currentText.substring(0, index++);
+          if (index > currentText.length) {
+            phase = 1;
+            setTimeout(typeLoop, 1000);
+            return;
+          }
+        } 
+        
+        else if (phase === 1) {
+          el.textContent = currentText.substring(0, index--);
+          if (index < 0) {
+            phase = 2;
+            currentText = text2;
+            index = 0;
+          }
+        } 
+        
+        else if (phase === 2) {
+          el.textContent = currentText.substring(0, index++);
+          if (index > currentText.length) {
+            phase = 0;
+            currentText = text1;
+            index = 0;
+            setTimeout(typeLoop, 1500);
+            return;
+          }
+        }
+
+        const speed = phase === 1 ? 40 : 70; // faster delete, slower type
+        setTimeout(typeLoop, speed);
+      }
+
+      typeLoop();
+    </script>
   </body>
 </html>
