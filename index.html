@@ -4,13 +4,20 @@
     <title>Sean's Site</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      /* Restore default font and basic spacing */
+      /* Use Helvetica for all text, bold for headings */
       body {
-        font-family: inherit; /* default browser font */
+        font-family: Helvetica, Arial, sans-serif;
         line-height: 1.5;
-        margin: 1em;
+        margin: 2em; /* increased margin for better spacing */
       }
-      h1, h2, h3, h4, h5, h6, p, a {
+      h1, h2, h3, h4, h5, h6, strong, b {
+        font-family: Helvetica, Arial, sans-serif;
+        font-weight: bold;
+      }
+      p, a, span {
+        font-family: Helvetica, Arial, sans-serif;
+      }
+      h1, h2, h3, h4, h5, h6, p, a, span {
         margin-top: 0.5em;
         margin-bottom: 0.5em;
       }
@@ -18,7 +25,7 @@
   </head>
 
   <body>
-    <h1 class="text-5xl text-purple-500 font-bold mb-6">
+    <h1 class="text-5xl text-purple-500 mb-6">
       SEAN GILBERT TOOMEY
     </h1>
 
