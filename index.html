@@ -10,7 +10,6 @@
       }
 
       h1, h2, h3, h4, h5, h6, strong, b {
-        font-family: Helvetica, Arial, sans-serif;
         font-weight: bold;
       }
 
@@ -23,7 +22,6 @@
         margin-bottom: 0.5em;
       }
 
-      /* blinking underscore */
       .blink {
         animation: blink 1s steps(2, start) infinite;
       }
@@ -39,7 +37,7 @@
   <body class="m-8">
     <!-- TITLE -->
     <h1 class="text-5xl text-black font-bold mb-6">
-      <span id="typewriter"></span><span class="blink">_</span>
+      <span id="typewriter">Sean Gilbert Toomey</span><span class="blink">_</span>
     </h1>
 
     <h2 class="text-xl font-semibold mt-4">My Writing</h2>
@@ -102,50 +100,47 @@
 
     <!-- TYPEWRITER SCRIPT -->
     <script>
-      const text1 = "Sean Gilbert Toomey";
-      const text2 = "Your best intern ever";
+      const texts = [
+        "Sean Gilbert Toomey",
+        "Baeguls",
+        "Enderlordsgt",
+        "Bongomatic_tv"
+      ];
 
       const el = document.getElementById("typewriter");
 
-      let currentText = text1;
-      let index = 0;
-      let phase = 0; // 0 typing first, 1 deleting, 2 typing second
+      let textIndex = 0;
+      let charIndex = texts[0].length;
+      let isDeleting = true;
 
-      function typeLoop() {
-        if (phase === 0) {
-          el.textContent = currentText.substring(0, index++);
-          if (index > currentText.length) {
-            phase = 1;
-            setTimeout(typeLoop, 1000);
-            return;
+      function loop() {
+        const current = texts[textIndex];
+
+        if (isDeleting) {
+          el.textContent = current.substring(0, charIndex--);
+
+          if (charIndex < 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+            charIndex = 0;
           }
-        } 
-        
-        else if (phase === 1) {
-          el.textContent = currentText.substring(0, index--);
-          if (index < 0) {
-            phase = 2;
-            currentText = text2;
-            index = 0;
-          }
-        } 
-        
-        else if (phase === 2) {
-          el.textContent = currentText.substring(0, index++);
-          if (index > currentText.length) {
-            phase = 0;
-            currentText = text1;
-            index = 0;
-            setTimeout(typeLoop, 1500);
+        } else {
+          const next = texts[textIndex];
+          el.textContent = next.substring(0, charIndex++);
+
+          if (charIndex > next.length) {
+            isDeleting = true;
+            setTimeout(loop, 1200);
             return;
           }
         }
 
-        const speed = phase === 1 ? 40 : 70; // faster delete, slower type
-        setTimeout(typeLoop, speed);
+        const speed = isDeleting ? 35 : 70;
+        setTimeout(loop, speed);
       }
 
-      typeLoop();
+      // pause before first delete (so your name sits confidently)
+      setTimeout(loop, 1500);
     </script>
   </body>
 </html>
