@@ -7,7 +7,7 @@
       body {
         font-family: Helvetica, Arial, sans-serif;
         line-height: 1.5;
-        margin: 32px; /* 32px margin around all edges */
+        margin: 48px 32px 32px 32px; /* extra top margin + 32px sides */
       }
 
       h1, h2, h3, h4, h5, h6, strong, b {
@@ -31,17 +31,9 @@
         to { visibility: hidden; }
       }
 
-      /* Optional: gradient + pulse for typewriter text */
+      /* Removed gradient and pulse for typewriter text */
       #typewriter {
-        background: linear-gradient(90deg, #FF5F6D, #FFC371);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: pulse 2s infinite alternate;
-      }
-
-      @keyframes pulse {
-        from { opacity: 0.6; }
-        to { opacity: 1; }
+        color: black;
       }
     </style>
   </head>
@@ -49,7 +41,7 @@
   <body>
     <!-- TITLE -->
     <h1 class="text-5xl text-black font-bold mb-6">
-      Sean Gilbert Toomey is <span id="typewriter">enderlordsgt</span><span class="blink">|</span>
+      Sean Gilbert Toomey is <span id="typewriter">enderlordsgt</span><span class="blink">_</span>
     </h1>
 
     <h2 class="text-xl font-semibold mt-4">My Writing</h2>
@@ -142,7 +134,7 @@
           el.textContent = current.substring(0, charIndex++);
           if (charIndex > current.length) {
             isDeleting = true;
-            setTimeout(loop, 1200); // pause at the end
+            setTimeout(loop, 2400); // pause at the end
             return;
           }
         }
