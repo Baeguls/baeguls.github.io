@@ -7,7 +7,9 @@
       body {
         font-family: Helvetica, Arial, sans-serif;
         line-height: 1.5;
-        margin: 48px 32px 32px 32px; /* extra top margin + 32px sides */
+        margin: 0;
+        padding: 64px 80px 64px 80px;
+        max-width: 900px;
       }
 
       h1, h2, h3, h4, h5, h6, strong, b {
@@ -31,7 +33,6 @@
         to { visibility: hidden; }
       }
 
-      /* Removed gradient and pulse for typewriter text */
       #typewriter {
         color: black;
       }
@@ -105,13 +106,13 @@
     <!-- TYPEWRITER SCRIPT -->
     <script>
       const texts = [
-        "enderlordsgt",
-        "your next intern",
         "a writer",
+        "chewing his pen",
+        "your next intern",
         "gay??",
-        "bongomatic_tv",
-        "learning to skate",
-        "sitting in a cafe"
+        "bongomatic_tv, baeguls, enderlordsgt",
+        "single",
+        "qeihfvbqievlafelbjk"
       ];
 
       const el = document.getElementById("typewriter");
@@ -134,7 +135,7 @@
           el.textContent = current.substring(0, charIndex++);
           if (charIndex > current.length) {
             isDeleting = true;
-            setTimeout(loop, 2400); // pause at the end
+            setTimeout(loop, 2400);
             return;
           }
         }
