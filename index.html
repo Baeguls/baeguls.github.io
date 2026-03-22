@@ -136,12 +136,12 @@
           el.textContent = current.substring(0, charIndex++);
           if (charIndex > current.length) {
             isDeleting = true;
-            setTimeout(loop, 2400);
+            setTimeout(loop, 1800);
             return;
           }
         }
 
-        const speed = isDeleting ? 35 : 70;
+        const speed = isDeleting ? 35 : 110;
         setTimeout(loop, speed);
       }
 
