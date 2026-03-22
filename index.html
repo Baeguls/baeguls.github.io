@@ -72,7 +72,7 @@
       </p>
 
       <p>
-        <a href="essays/lovepoem.html" class="entry-title">Two-Body Problem</a><br>
+        <a href="essays/lovepoem.html" class="entry-title">Gender War</a><br>
         <span class="entry-meta">Lunch in Hell Magazine</span>
       </p>
 
@@ -134,11 +134,15 @@
           }
         } else {
           el.textContent = current.substring(0, charIndex++);
-          if (charIndex > current.length) {
-            isDeleting = true;
-            setTimeout(loop, 1800);
-            return;
-          }
+        if (charIndex > current.length) {
+        isDeleting = true;
+
+        // 10s pause for "a writer", 1.8s for everything else
+        const delay = textIndex === 0 ? 10000 : 1800;
+
+        setTimeout(loop, delay);
+        return;
+      }
         }
 
         const speed = isDeleting ? 35 : 110;
