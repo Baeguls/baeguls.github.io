@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sean's Site</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        line-height: 1.5;
+        margin: 0;
+        padding: 64px 80px 64px 80px;
+        max-width: 900px;
+      }
+      @media (max-width: 640px) {
+        body {
+          padding: 40px 24px 40px 24px;
+        }
+      }
+      h1, h2, h3, h4, h5, h6, strong, b { font-weight: bold; }
+      p, a, span { font-family: Helvetica, Arial, sans-serif; }
+      h1, h2, h3, h4, h5, h6, p, a, span { margin-top: 0.5em; margin-bottom: 0.5em; }
+      .blink { animation: blink 1s steps(2, start) infinite; }
+      @keyframes blink { to { visibility: hidden; } }
+      #typewriter { color: black; }
+      .entry-title {
+        font-size: clamp(1.1rem, 4vw, 1.2rem);
+        font-weight: bold;
+        text-decoration: underline;
+        color: #2563eb;
+      }
+      .entry-meta {
+        font-size: clamp(0.875rem, 3vw, 0.95rem);
+        color: #4b5563;
+      }
+
+      /* ── Carousel ── */
+      .carousel-section { margin-top: 2.5rem; }
+      .carousel-section h2 { margin-bottom: 1rem; }
+
+      .carousel-track-wrapper {
+        position: relative;
+      }
+      .carousel-track {
+        display: flex;
+        gap: 14px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 4px;
+      }
+      .carousel-track::-webkit-scrollbar { display: none; }
+
+      /* TikTok cards: portrait */
+      .carousel-track.tiktok .video-card {
+        width: 160px;
+        flex-shrink: 0;
+      }
+      .carousel-track.tiktok .thumb-wrap {
+        aspect-ratio: 9/16;
+      }
+
+      /* YouTube cards: landscape */
+      .carousel-track.youtube .video-card {
+        width: 260px;
+        flex-shrink: 0;
+      }
+      .carousel-track.youtube .thumb-wrap {
+        aspect-ratio: 16/9;
+      }
+
+      .video-card {
+        scroll-snap-align: start;
+        cursor: pointer;
+      }
+      .thumb-wrap {
+        position: relative;
+        width: 100%;
+        background: #e5e7eb;
+        overflow: hidden;
+        border-radius: 4px;
+      }
+      .thumb-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: opacity 0.2s;
+      }
+      .thumb-wrap:hover img { opacity: 0.85; }
+      .play-btn {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+      }
+      .play-btn svg {
+        width: 36px;
+        height: 36px;
+        opacity: 0.85;
+        filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5));
+      }
+      .video-meta {
+        margin-top: 6px;
+        font-size: 0.78rem;
+        color: #6b7280;
+        line-height: 1.3;
+      }
+      .video-meta .views {
+        font-weight: bold;
+        color: #374151;
+      }
+
+      /* nav arrows */
+      .carousel-nav {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .carousel-nav button {
+        background: none;
+        border: 1.5px solid #d1d5db;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #374151;
+        transition: border-color 0.15s, background 0.15s;
+      }
+      .carousel-nav button:hover {
+        border-color: #374151;
+        background: #f3f4f6;
+      }
+
+      @media (max-width: 640px) {
+        .carousel-track.tiktok .video-card { width: 130px; }
+        .carousel-track.youtube .video-card { width: 220px; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1 class="text-5xl text-black font-bold mb-6">
+      Sean Toomey is <span id="typewriter"></span><span class="blink">_</span>
+    </h1>
+
+    <h2 class="text-xl font-semibold mt-4 underline">Published</h2>
+    <div class="mt-3 space-y-2">
+      <p>
+        <a href="essays/workers-party.html" class="entry-title">No Workers in the Workers' Party</a><br>
+        <a href="lunchinhell.pdf" class="entry-meta underline hover:underline" style="color:#4b5563;">Lunch in Hell Magazine (2025)</a>
+      </p>
+      <p>
+        <a href="essays/lovepoem.html" class="entry-title">Gender War</a><br>
+        <a href="lunchinhell.pdf" class="entry-meta underline hover:underline" style="color:#4b5563;">Lunch in Hell Magazine (2025)</a>
+      </p>
+      <p>
+        <a href="essays/19things.html" class="entry-title">19 Things I Did Before I Turned 19</a><br>
+        <span class="entry-meta">West 4th Street Review (2024)</span>
+      </p>
+      <p>
+        <a href="https://whssignals.com/opinion/2023/01/12/who-andrew-tate-really-is/" class="entry-title">Who Andrew Tate Really Is</a><br>
+        <span class="entry-meta">Signals (2023)</span>
+      </p>
+    </div>
+
+    <!-- TikTok Carousel -->
+    <div class="carousel-section">
+      <h2 class="text-xl font-semibold underline">Making TikToks</h2>
+      <div class="carousel-track-wrapper">
+        <div class="carousel-track tiktok" id="tiktok-track"></div>
+      </div>
+      <div class="carousel-nav">
+        <button onclick="scroll('tiktok-track', -1)" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button onclick="scroll('tiktok-track', 1)" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- YouTube Carousel -->
+    <div class="carousel-section">
+      <h2 class="text-xl font-semibold underline">Making videos</h2>
+      <div class="carousel-track-wrapper">
+        <div class="carousel-track youtube" id="youtube-track"></div>
+      </div>
+      <div class="carousel-nav">
+        <button onclick="scroll('youtube-track', -1)" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button onclick="scroll('youtube-track', 1)" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // ─────────────────────────────────────────────
+      // VIDEO CONFIG — edit views here once you have them
+      // For TikTok thumbnails: save a screenshot and host it,
+      // or use a direct image URL. Set thumb to null to show a gray placeholder.
+      // ─────────────────────────────────────────────
+
+      const TIKTOK_VIDEOS = [
+        { url: "https://www.tiktok.com/@enderlordsgt/video/7631622816047090957", thumb: null, views: null, label: "" },
+        { url: "https://www.tiktok.com/@enderlordsgt/video/7548576164932029710", thumb: null, views: null, label: "" },
+        { url: "https://www.tiktok.com/@enderlordsgt/video/7594701936452979982", thumb: null, views: null, label: "" },
+        { url: "https://www.tiktok.com/@enderlordsgt/video/7544272379313130807", thumb: null, views: null, label: "" },
+        { url: "https://www.tiktok.com/@enderlordsgt/video/7603561098851224845", thumb: null, views: null, label: "" },
+        { url: "https://www.tiktok.com/@enderlordsgt/video/7572863266091846926", thumb: null, views: null, label: "" },
+        { url: "https://www.tiktok.com/@enderlordsgt/video/7554705226054323469", thumb: null, views: null, label: "" },
+        { url: "https://www.tiktok.com/@enderlordsgt/video/7535122756866723127", thumb: null, views: null, label: "" },
+        { url: "https://www.tiktok.com/@nyczoomer/video/6902860825569021189",    thumb: null, views: null, label: "" },
+        { url: "https://www.tiktok.com/@cartbeforethehorse/video/7620794941115010318", thumb: null, views: null, label: "" },
+      ];
+
+      // YouTube thumbnails are auto-fetched from video ID — no config needed for those.
+      // Just fill in views and an optional label.
+      const YOUTUBE_VIDEOS = [
+        { id: "x1kqEfwiArk", views: null, label: "" },
+        { id: "kRVShahe5fM", views: null, label: "" },
+        { id: "r_EGwvEr0cY",  views: null, label: "" },
+        { id: "P-PQJGCVuxk", views: null, label: "" },
+      ];
+
+      // ─────────────────────────────────────────────
+
+      const playIcon = `<svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.45)"/><polygon points="10,8 17,12 10,16" fill="white"/></svg>`;
+
+      function formatViews(n) {
+        if (n === null || n === undefined || n === "") return "views: —";
+        const num = parseInt(String(n).replace(/,/g, ""), 10);
+        if (isNaN(num)) return `views: ${n}`;
+        if (num >= 1000000) return `views: ${(num / 1000000).toFixed(1)}M`;
+        if (num >= 1000) return `views: ${(num / 1000).toFixed(0)}K`;
+        return `views: ${num.toLocaleString()}`;
+      }
+
+      function buildCard(url, thumb, views, label) {
+        const card = document.createElement("div");
+        card.className = "video-card";
+        card.onclick = () => window.open(url, "_blank");
+
+        const wrap = document.createElement("div");
+        wrap.className = "thumb-wrap";
+
+        if (thumb) {
+          const img = document.createElement("img");
+          img.src = thumb;
+          img.alt = label || "video thumbnail";
+          img.loading = "lazy";
+          wrap.appendChild(img);
+        } else {
+          // gray placeholder
+          wrap.style.background = "#d1d5db";
+        }
+
+        const play = document.createElement("div");
+        play.className = "play-btn";
+        play.innerHTML = playIcon;
+        wrap.appendChild(play);
+
+        const meta = document.createElement("div");
+        meta.className = "video-meta";
+        meta.innerHTML = `<span class="views">${formatViews(views)}</span>${label ? `<br>${label}` : ""}`;
+
+        card.appendChild(wrap);
+        card.appendChild(meta);
+        return card;
+      }
+
+      // Render TikToks
+      const tiktokTrack = document.getElementById("tiktok-track");
+      TIKTOK_VIDEOS.forEach(v => {
+        tiktokTrack.appendChild(buildCard(v.url, v.thumb, v.views, v.label));
+      });
+
+      // Render YouTubes
+      const ytTrack = document.getElementById("youtube-track");
+      YOUTUBE_VIDEOS.forEach(v => {
+        const thumb = `https://img.youtube.com/vi/${v.id}/maxresdefault.jpg`;
+        const url = `https://www.youtube.com/watch?v=${v.id}`;
+        ytTrack.appendChild(buildCard(url, thumb, v.views, v.label));
+      });
+
+      // Carousel scroll
+      function scroll(trackId, dir) {
+        const track = document.getElementById(trackId);
+        const card = track.querySelector(".video-card");
+        const cardW = card ? card.offsetWidth + 14 : 200;
+        track.scrollBy({ left: dir * cardW * 2, behavior: "smooth" });
+      }
+
+      // ─── Typewriter ───
+      const texts = [
+        " ",
+        "predicting the next election",
+        "buying $3 immitation caviar",
+        "hitchhiking europe with two outfits",
+        "mastering garlic rice",
+        "creating shareholder value"
+      ];
+      const el = document.getElementById("typewriter");
+      let textIndex = 0, charIndex = 0, isDeleting = false;
+      function loop() {
+        const current = texts[textIndex];
+        if (isDeleting) {
+          el.textContent = current.substring(0, charIndex--);
+          if (charIndex < 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+            charIndex = 0;
+          }
+        } else {
+          el.textContent = current.substring(0, charIndex++);
+          if (charIndex > current.length) {
+            isDeleting = true;
+            const delay = textIndex === 0 ? 10000 : 1800;
+            setTimeout(loop, delay);
+            return;
+          }
+        }
+        setTimeout(loop, isDeleting ? 35 : 110);
+      }
+      setTimeout(loop, 1500);
+    </script>
+  </body>
+</html>
