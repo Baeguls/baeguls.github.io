@@ -177,10 +177,10 @@
         <div class="carousel-track tiktok" id="tiktok-track"></div>
       </div>
       <div class="carousel-nav">
-        <button onclick="scroll('tiktok-track', -1)" aria-label="Previous">
+        <button onclick="slideCarousel('tiktok-track', -1)" aria-label="Previous">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
-        <button onclick="scroll('tiktok-track', 1)" aria-label="Next">
+        <button onclick="slideCarousel('tiktok-track', 1)" aria-label="Next">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
@@ -193,22 +193,16 @@
         <div class="carousel-track youtube" id="youtube-track"></div>
       </div>
       <div class="carousel-nav">
-        <button onclick="scroll('youtube-track', -1)" aria-label="Previous">
+        <button onclick="slideCarousel('youtube-track', -1)" aria-label="Previous">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
-        <button onclick="scroll('youtube-track', 1)" aria-label="Next">
+        <button onclick="slideCarousel('youtube-track', 1)" aria-label="Next">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
     </div>
 
     <script>
-      // ─────────────────────────────────────────────
-      // VIDEO CONFIG — edit views here once you have them
-      // For TikTok thumbnails: save a screenshot and host it,
-      // or use a direct image URL. Set thumb to null to show a gray placeholder.
-      // ─────────────────────────────────────────────
-
       const TIKTOK_VIDEOS = [
         { url: "https://www.tiktok.com/@enderlordsgt/video/7631622816047090957", thumb: null, views: null, label: "" },
         { url: "https://www.tiktok.com/@enderlordsgt/video/7548576164932029710", thumb: null, views: null, label: "" },
@@ -222,16 +216,12 @@
         { url: "https://www.tiktok.com/@cartbeforethehorse/video/7620794941115010318", thumb: null, views: null, label: "" },
       ];
 
-      // YouTube thumbnails are auto-fetched from video ID — no config needed for those.
-      // Just fill in views and an optional label.
       const YOUTUBE_VIDEOS = [
-        { id: "x1kqEfwiArk", views: null, label: "" },
-        { id: "kRVShahe5fM", views: null, label: "" },
-        { id: "r_EGwvEr0cY",  views: null, label: "" },
-        { id: "P-PQJGCVuxk", views: null, label: "" },
+        { id: "x1kqEfwiArk", views: 51000, label: "" },
+        { id: "kRVShahe5fM", views: 41000, label: "" },
+        { id: "r_EGwvEr0cY",  views: 21000, label: "" },
+        { id: "P-PQJGCVuxk", views: 590, label: "" },
       ];
-
-      // ─────────────────────────────────────────────
 
       const playIcon = `<svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.45)"/><polygon points="10,8 17,12 10,16" fill="white"/></svg>`;
 
@@ -259,7 +249,6 @@
           img.loading = "lazy";
           wrap.appendChild(img);
         } else {
-          // gray placeholder
           wrap.style.background = "#d1d5db";
         }
 
@@ -292,7 +281,7 @@
       });
 
       // Carousel scroll
-      function scroll(trackId, dir) {
+      function slideCarousel(trackId, dir) {
         const track = document.getElementById(trackId);
         const card = track.querySelector(".video-card");
         const cardW = card ? card.offsetWidth + 14 : 200;
